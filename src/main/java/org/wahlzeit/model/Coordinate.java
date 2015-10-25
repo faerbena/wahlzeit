@@ -72,5 +72,15 @@ class Coordinate {
 		double longitudinalDistance = this.getLongitude() - c.getLongitude();
 		return longitudinalDistance;
 	}
+	
+	/**
+	 * @methodtype boolean-query
+	 */		
+	public boolean isEqualTo(Coordinate c) {
+		if (this.getLatitude() == c.getLatitude() && this.getLongitude() == c.getLongitude()) {
+			return true;
+		}
+		return false;
+	}
 
 }
