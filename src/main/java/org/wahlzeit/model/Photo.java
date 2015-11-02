@@ -138,7 +138,7 @@ public class Photo extends DataObject {
 	Key parent = ObjectManager.applicationRootKey;
 
 	/**
-	 *
+	 * @methodtype constructor @methodproperty hook
 	 */
 	public Photo() {
 		id = PhotoId.getNextId();
@@ -146,7 +146,7 @@ public class Photo extends DataObject {
 	}
 
 	/**
-	 * @methodtype constructor
+	 * @methodtype constructor @methodproperty hook
 	 */
 	public Photo(PhotoId myId) {
 		id = myId;
