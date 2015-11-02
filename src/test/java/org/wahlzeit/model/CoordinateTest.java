@@ -6,10 +6,10 @@ import org.junit.Test;
 import org.junit.BeforeClass;
 
 public class CoordinateTest {
-	static Coordinate c1 = new Coordinate(120,90);
+	static Coordinate c1 = new Coordinate(80,120);
 	static Coordinate c2 = null;
-	static Coordinate c3 = new Coordinate(80,140);
-	static Coordinate c4 = new Coordinate(150,30);
+	static Coordinate c3 = new Coordinate(85,80);
+	static Coordinate c4 = new Coordinate(30,150);
 	
 	@BeforeClass
 	public static void testPredefinded() {
@@ -17,6 +17,26 @@ public class CoordinateTest {
 		assertNull(c2);
 		assertNotNull(c3);
 		assertNotNull(c4);
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testLatitudeTooSmall() {		
+		Coordinate c5 = new Coordinate(-90.1,0);
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testLatitudeTooBig() {		
+		Coordinate c5 = new Coordinate(90.1,0);
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testLongitudeTooSmall() {		
+		Coordinate c5 = new Coordinate(-180.1,0);
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testLongitudeTooBig() {		
+		Coordinate c5 = new Coordinate(180.1,0);
 	}
 
 	@Test (expected=NullPointerException.class)
@@ -35,60 +55,38 @@ public class CoordinateTest {
 	}
 	
 	@Test
-	public void testGetDistanceToSelf() {
-		Coordinate distance = c1.getDistance(c1);
-		assertNotNull(distance);
-		assertTrue(distance.isEqualTo(new Coordinate(0,0)));
+	public void testGetLatitudinalDistance() {
+		double dist1 = c1.getLatitudinalDistance(c1);
+		assertEquals(0,dist1,0);
+		
+		double dist2 = c1.getLatitudinalDistance(c3);
+		assertEquals(5,dist2,0);
+		
+		double dist3 = c1.getLatitudinalDistance(c4);
+		assertEquals(50,dist3,0);
 	}
 	
 	@Test
-	public void testGetLatitudinalDistanceToSelf() {
-		double distance = c1.getLatitudinalDistance(c1);
-		assertEquals(0,distance,0);
+	public void testGetLongitudinalDistance() {
+		double dist1 = c1.getLongitudinalDistance(c1);
+		assertEquals(0,dist1,0);
+		
+		double dist2 = c1.getLongitudinalDistance(c3);
+		assertEquals(40,dist2,0);
+		
+		double dist3 = c1.getLongitudinalDistance(c4);
+		assertEquals(30,dist3,0);
 	}
 	
 	@Test
-	public void testGetLongitudinalDistanceToSelf() {
-		double distance = c1.getLongitudinalDistance(c1);
-		assertEquals(0,distance,0);
+	public void testGetDistance() {
+		double dist1 = c1.getDistance(c1);
+		assertEquals(0,dist1,0);
+		
+		double dist2 = c1.getDistance(c3);
+		assertEquals(2652912.85,dist2,0.1);
+		
+		double dist3 = c1.getDistance(c4);
+		assertEquals(3318241.13,dist3,0.1);
 	}
-	
-	@Test
-	public void testGetDistanceToc3() {
-		Coordinate distance = c1.getDistance(c3);
-		assertNotNull(distance);
-		assertTrue(distance.isEqualTo(new Coordinate(40,-50)));
-	}
-	
-	@Test
-	public void testGetLatitudinalDistanceToc3() {
-		double distance = c1.getLatitudinalDistance(c3);
-		assertEquals(40,distance,0);
-	}
-	
-	@Test
-	public void testGetLongitudinalDistanceToc3() {
-		double distance = c1.getLongitudinalDistance(c3);
-		assertEquals(-50,distance,0);
-	}
-	
-	@Test
-	public void testGetDistanceToc4() {
-		Coordinate distance = c1.getDistance(c4);
-		assertNotNull(distance);
-		assertTrue(distance.isEqualTo(new Coordinate(-30,60)));
-	}
-	
-	@Test
-	public void testGetLatitudinalDistanceToc4() {
-		double distance = c1.getLatitudinalDistance(c4);
-		assertEquals(-30,distance,0);
-	}
-	
-	@Test
-	public void testGetLongitudinalDistanceToc4() {
-		double distance = c1.getLongitudinalDistance(c4);
-		assertEquals(60,distance,0);
-	}	
-
 }

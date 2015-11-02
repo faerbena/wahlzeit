@@ -2,6 +2,7 @@
  * 
  */
 package org.wahlzeit.model;
+import static java.lang.Math.*;
 
 /**
  * @author faerbena
@@ -14,7 +15,13 @@ class Coordinate {
 	/**
 	 * @methodtype constructor
 	 */
-	public Coordinate(double latitude, double longitude) {
+	public Coordinate(double latitude, double longitude) throws IllegalArgumentException {
+		if (latitude < -90 || latitude > 90) {
+			throw new IllegalArgumentException(" The latitude needs to be between -90 and 90.");
+		}
+		if (longitude < -180 || latitude > 180) {
+			throw new IllegalArgumentException(" The longitude needs to be between -180 and 180.");
+		}
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
@@ -50,33 +57,40 @@ class Coordinate {
 	/**
 	 * @methodtype query
 	 */	
-	public Coordinate getDistance(Coordinate c) {
-		double latitudinalDistance = getLatitudinalDistance(c);
-		double longitudinalDistance = getLongitudinalDistance(c);
-		Coordinate distance = new Coordinate(latitudinalDistance, longitudinalDistance);
-		return distance;
+	public double getDistance(Coordinate c) {
+		if (this.isEqual(c)) {
+			return 0;
+		}
+		// latitude and longitude of both Coordinates in Radiant
+		double thisLatRad = PI*this.getLatitude()/180;
+		double thisLongRad = PI*this.getLongitude()/180;
+		double cLatRad = PI*c.getLatitude()/180;
+		double cLongRad = PI*c.getLongitude()/180;
+		
+		double centralAngle = acos(sin(thisLatRad)*sin(cLatRad) + cos(thisLongRad)*cos(cLongRad)*cos(abs(thisLongRad-cLongRad)));
+		return 6371000*centralAngle;
 	}
 	
 	/**
 	 * @methodtype query
 	 */	
 	public double getLatitudinalDistance(Coordinate c) {
-		double latitudinalDistance = this.getLatitude() - c.getLatitude();
-		return latitudinalDistance;
+		double dist = this.getLatitude() - c.getLatitude();
+		return abs(dist);
 	}
 	
 	/**
 	 * @methodtype query
 	 */	
 	public double getLongitudinalDistance(Coordinate c) {
-		double longitudinalDistance = this.getLongitude() - c.getLongitude();
-		return longitudinalDistance;
+		double dist = this.getLongitude() - c.getLongitude();
+		return abs(dist);
 	}
 	
 	/**
 	 * @methodtype boolean-query
 	 */		
-	public boolean isEqualTo(Coordinate c) {
+	public boolean isEqual(Coordinate c) {
 		if (this.getLatitude() == c.getLatitude() && this.getLongitude() == c.getLongitude()) {
 			return true;
 		}
