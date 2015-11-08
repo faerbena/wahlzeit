@@ -76,14 +76,14 @@ public class PhotoFactory {
 	 * @methodtype factory
 	 */
 	public Photo createPhoto() {
-		return new DogPhoto();
+		return new Photo();
 	}
 
 	/**
 	 * Creates a new photo with the specified id
 	 */
 	public Photo createPhoto(PhotoId id) {
-		return new DogPhoto(id);
+		return new Photo(id);
 	}
 
 	/**

@@ -27,5 +27,40 @@ public class Location {
 		this.name = name;
 		this.coordinate = c;
 	}
+	
+	/**
+	 * @methodtype get
+	 */
+	public String getName() {
+		return this.name;
+	}
+	
+	/**
+	 * @methodtype set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	/**
+	 * @methodtype get
+	 */
+	public Coordinate getCoordinate() {
+		return this.coordinate;
+	}
+	
+	/**
+	 * @methodtype set
+	 */
+	public void setCoordinate(Coordinate coordinate) {
+		this.coordinate = coordinate;
+	}
 
+	/**
+	 * @methodtype set @methodproperty convenience
+	 */
+	public void setCoordinate(double latitude, double longitude) {
+		Coordinate coordinate = new Coordinate(latitude,longitude);
+		this.coordinate = coordinate;
+	}
 }
