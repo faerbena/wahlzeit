@@ -23,9 +23,6 @@ class SphericCoordinate implements Coordinate {
 		if (longitude < -180 || latitude > 180) {
 			throw new IllegalArgumentException(" The longitude needs to be between -180 and 180.");
 		}
-		if (radius < 0) {
-			throw new IllegalArgumentException(" The radius needs to be greater than 0.");
-		}
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
