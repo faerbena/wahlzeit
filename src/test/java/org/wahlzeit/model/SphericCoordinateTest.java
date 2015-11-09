@@ -94,8 +94,11 @@ public class SphericCoordinateTest {
 	}
 	
 	@Test
-	public void testToCartesian() {
-		assertTrue(c0.toCartesian().isEqual(new CartesianCoordinate(0,0,0)));
-		assertTrue(c5.toCartesian().isEqual(new CartesianCoordinate(-1,1,sqrt(2))));
+	public void testIsEqual() {
+		assertTrue(c0.isEqual(new SphericCoordinate(0,0,0)));
+		assertTrue(c5.isEqual(new SphericCoordinate(45,135,2)));
+		
+		assertTrue(c0.isEqual(new CartesianCoordinate(0,0,0)));
+		assertTrue(c5.isEqual(new CartesianCoordinate(-1,1,sqrt(2))));
 	}
 }

@@ -25,9 +25,12 @@ public class CartesianCoordinateTest {
 	}
 	
 	@Test
-	public void testToSpheric() {
-		assertTrue(c1.toSpheric().isEqual(new SphericCoordinate(0,0,0)));
-		assertTrue(c3.toSpheric().isEqual(new SphericCoordinate(45,135,2)));
+	public void testIsEqual() {
+		assertTrue(c1.isEqual(new CartesianCoordinate(0,0,0)));
+		assertTrue(c3.isEqual(new CartesianCoordinate(-1,1,-sqrt(2))));
+		
+		assertTrue(c1.isEqual(new SphericCoordinate(0,0,0)));
+		assertTrue(c3.isEqual(new SphericCoordinate(45,135,2)));
 	}
 
 }
