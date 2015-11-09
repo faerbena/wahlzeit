@@ -1,15 +1,18 @@
 package org.wahlzeit.model;
 
+import static java.lang.Math.sqrt;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.BeforeClass;
 
-public class CoordinateTest {
-	static Coordinate c1 = new Coordinate(80,120);
-	static Coordinate c2 = null;
-	static Coordinate c3 = new Coordinate(85,80);
-	static Coordinate c4 = new Coordinate(30,150);
+public class SphericCoordinateTest {
+	static SphericCoordinate c0 = new SphericCoordinate(0,0,0);
+	static SphericCoordinate c1 = new SphericCoordinate(80,120);
+	static SphericCoordinate c2 = null;
+	static SphericCoordinate c3 = new SphericCoordinate(85,80);
+	static SphericCoordinate c4 = new SphericCoordinate(30,150);
+	static SphericCoordinate c5 = new SphericCoordinate(45,135,2);
 	
 	@BeforeClass
 	public static void testPredefinded() {
@@ -21,22 +24,22 @@ public class CoordinateTest {
 	
 	@Test (expected=IllegalArgumentException.class)
 	public void testLatitudeTooSmall() {		
-		Coordinate c5 = new Coordinate(-90.1,0);
+		SphericCoordinate c6 = new SphericCoordinate(-90.1,0);
 	}
 	
 	@Test (expected=IllegalArgumentException.class)
 	public void testLatitudeTooBig() {		
-		Coordinate c5 = new Coordinate(90.1,0);
+		SphericCoordinate c6 = new SphericCoordinate(90.1,0);
 	}
 	
 	@Test (expected=IllegalArgumentException.class)
 	public void testLongitudeTooSmall() {		
-		Coordinate c5 = new Coordinate(-180.1,0);
+		SphericCoordinate c6 = new SphericCoordinate(-180.1,0);
 	}
 	
 	@Test (expected=IllegalArgumentException.class)
 	public void testLongitudeTooBig() {		
-		Coordinate c5 = new Coordinate(180.1,0);
+		SphericCoordinate c6 = new SphericCoordinate(180.1,0);
 	}
 
 	@Test (expected=NullPointerException.class)
@@ -88,5 +91,11 @@ public class CoordinateTest {
 		
 		double dist3 = c1.getDistance(c4);
 		assertEquals(3318241.13,dist3,0.1);
+	}
+	
+	@Test
+	public void testToCartesian() {
+		assertTrue(c0.toCartesian().isEqual(new CartesianCoordinate(0,0,0)));
+		assertTrue(c5.toCartesian().isEqual(new CartesianCoordinate(-1,1,sqrt(2))));
 	}
 }

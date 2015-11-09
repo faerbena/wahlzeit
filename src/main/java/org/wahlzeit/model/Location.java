@@ -17,7 +17,7 @@ public class Location {
 	 */
 	public Location(String name, double latitude, double longitude) {
 		this.name = name;
-		this.coordinate = new Coordinate(latitude,longitude);
+		this.coordinate = new SphericCoordinate(latitude,longitude);
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class Location {
 	/**
 	 * @methodtype set
 	 */
-	public void setCoordinate(Coordinate coordinate) {
+	public void setCoordinate(SphericCoordinate coordinate) {
 		this.coordinate = coordinate;
 	}
 
@@ -60,7 +60,7 @@ public class Location {
 	 * @methodtype set @methodproperty convenience
 	 */
 	public void setCoordinate(double latitude, double longitude) {
-		Coordinate coordinate = new Coordinate(latitude,longitude);
+		SphericCoordinate coordinate = new SphericCoordinate(latitude,longitude);
 		this.coordinate = coordinate;
 	}
 }
