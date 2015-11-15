@@ -10,6 +10,9 @@ import org.wahlzeit.services.DataObject;
 
 public abstract class AbstractCoordiante extends DataObject implements Coordinate {
 
+	/**
+	 * @methodtype composed-conversion
+	 */	
 	@Override
 	public double getDistance(Coordinate c) throws IllegalArgumentException {
 		if (this.isEqual(c)) {
@@ -35,6 +38,9 @@ public abstract class AbstractCoordiante extends DataObject implements Coordinat
 		return sThis.getRadius()*centralAngle;
 	}
 
+	/**
+	 * @methodtype composed-conversion
+	 */		
 	@Override
 	public boolean isEqual(Coordinate c) {
 		SphericCoordinate sThis = this.toSpheric();
