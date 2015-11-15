@@ -1,7 +1,7 @@
 package org.wahlzeit.model;
 import static java.lang.Math.*;
 
-public class CartesianCoordinate implements Coordinate {
+public class CartesianCoordinate extends AbstractCoordiante {
 	private double x;
 	private double y;
 	private double z;
@@ -57,40 +57,10 @@ public class CartesianCoordinate implements Coordinate {
 		this.z = z;
 	}
 
-	@Override
-	public double getDistance(Coordinate c) {
-		if (this.isEqual(c)) {
-			return 0;
-		}
-		
-		// convert both coordinates to spheric
-		SphericCoordinate sThis = this.toSpheric();
-		SphericCoordinate sc = c.toSpheric();
-		
-		// latitude and longitude of both Coordinates in Radiant
-		double thisLatRad = toRadians(sThis.getLatitude());
-		double thisLongRad = toRadians(sThis.getLongitude());
-		double cLatRad = toRadians(sc.getLatitude());
-		double cLongRad = toRadians(sc.getLongitude());
-		
-		double centralAngle = acos(sin(thisLatRad)*sin(cLatRad) + cos(thisLongRad)*cos(cLongRad)*cos(abs(thisLongRad-cLongRad)));
-		return sThis.getRadius()*centralAngle;
-	}
-
-	@Override
-	public boolean isEqual(Coordinate c) {
-		CartesianCoordinate cc = c.toCartesian();
-		
-		if (this.getX() == cc.getX() && this.getY() == cc.getY() && this.getZ() == cc.getZ()) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public CartesianCoordinate toCartesian() {
-		return this;
-	}
+//	@Override
+//	public CartesianCoordinate toCartesian() {
+//		return this;
+//	}
 
 	@Override
 	public SphericCoordinate toSpheric() {

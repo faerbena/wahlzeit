@@ -10,25 +10,30 @@ package org.wahlzeit.model;
 interface Coordinate {
 	/**
 	 * @methodtype query
+	 * 
+	 * Calculates the great-circle distance of two coordinates.
 	 */	
 	public double getDistance(Coordinate c);
 	
 	/**
 	 * @methodtype boolean-query
+	 * 
+	 * Returns true, if both coordinates identify the same point
+	 * regardless their representation.
 	 */		
 	public boolean isEqual(Coordinate c);
 	
-	/**
-	 * @methodtype helper
-	 * 
-	 * converts the coordinate to cartesian
-	 */		
-	public CartesianCoordinate toCartesian();
+//	/**
+//	 * @methodtype conversion-helper
+//	 * 
+//	 * Converts the coordinate to cartesian
+//	 */		
+//	public CartesianCoordinate toCartesian();
 	
 	/**
-	 * @methodtype helper
+	 * @methodtype conversion-helper
 	 * 
-	 * converts the coordinate to spheric
+	 * Converts the coordinate to spheric
 	 */		
 	public SphericCoordinate toSpheric();
 

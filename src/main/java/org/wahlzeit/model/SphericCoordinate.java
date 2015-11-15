@@ -8,7 +8,7 @@ import static java.lang.Math.*;
  * @author faerbena
  *
  */
-class SphericCoordinate implements Coordinate {
+class SphericCoordinate extends AbstractCoordiante {
 	private double latitude;
 	private double longitude;
 	private double radius = 6371000;
@@ -81,24 +81,6 @@ class SphericCoordinate implements Coordinate {
 		this.radius = radius;
 	}
 	
-	@Override
-	public double getDistance(Coordinate c) {
-		if (this.isEqual(c)) {
-			return 0;
-		}
-		
-		SphericCoordinate sc = c.toSpheric();
-		
-		// latitude and longitude of both Coordinates in Radiant
-		double thisLatRad = toRadians(this.getLatitude());
-		double thisLongRad = toRadians(this.getLongitude());
-		double cLatRad = toRadians(sc.getLatitude());
-		double cLongRad = toRadians(sc.getLongitude());
-		
-		double centralAngle = acos(sin(thisLatRad)*sin(cLatRad) + cos(thisLongRad)*cos(cLongRad)*cos(abs(thisLongRad-cLongRad)));
-		return radius*centralAngle;
-	}
-	
 	/**
 	 * @methodtype query
 	 */	
@@ -115,28 +97,18 @@ class SphericCoordinate implements Coordinate {
 		return abs(dist);
 	}
 	
-	@Override	
-	public boolean isEqual(Coordinate c) {
-		SphericCoordinate sc = c.toSpheric();
-		
-		if (this.getLatitude() == sc.getLatitude() && this.getLongitude() == sc.getLongitude() && this.getRadius() == sc.getRadius()) {
-			return true;
-		}
-		return false;
-	}
-	
 	@Override
 	public SphericCoordinate toSpheric() {	
 		return this;
 	}
 	
-	@Override
-	public CartesianCoordinate toCartesian() {
-		double x = this.getRadius() * sin(toRadians(this.getLatitude())) * cos(toRadians(this.getLongitude()));
-		double y = this.getRadius() * sin(toRadians(this.getLatitude())) * sin(toRadians(this.getLongitude()));
-		double z = this.getRadius() * cos(toRadians(this.getLatitude()));
-		
-		return new CartesianCoordinate(x, y, z);
-	}
+//	@Override
+//	public CartesianCoordinate toCartesian() {
+//		double x = this.getRadius() * sin(toRadians(this.getLatitude())) * cos(toRadians(this.getLongitude()));
+//		double y = this.getRadius() * sin(toRadians(this.getLatitude())) * sin(toRadians(this.getLongitude()));
+//		double z = this.getRadius() * cos(toRadians(this.getLatitude()));
+//		
+//		return new CartesianCoordinate(x, y, z);
+//	}
 
 }
