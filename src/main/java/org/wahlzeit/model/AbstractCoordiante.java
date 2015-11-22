@@ -10,6 +10,7 @@ import org.wahlzeit.services.DataObject;
 
 public abstract class AbstractCoordiante extends DataObject implements Coordinate {
 
+	private static final double DELTA = 0.00001; // constant for comparing double values
 	/**
 	 * @methodtype composed-conversion
 	 */	
@@ -46,7 +47,9 @@ public abstract class AbstractCoordiante extends DataObject implements Coordinat
 		SphericCoordinate sThis = this.toSpheric();
 		SphericCoordinate sc = c.toSpheric();
 		
-		if (sThis.getLatitude() == sc.getLatitude() && sThis.getLongitude() == sc.getLongitude() && sThis.getRadius() == sc.getRadius()) {
+		if (abs(sThis.getLatitude() - sc.getLatitude()) < DELTA 
+				&& abs(sThis.getLongitude() - sc.getLongitude()) < DELTA 
+				&& abs(sThis.getRadius() - sc.getRadius()) < DELTA) {
 			return true;
 		}
 		return false;
