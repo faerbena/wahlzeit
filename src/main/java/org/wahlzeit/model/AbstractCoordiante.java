@@ -16,6 +16,8 @@ public abstract class AbstractCoordiante extends DataObject implements Coordinat
 	 */	
 	@Override
 	public double getDistance(Coordinate c) throws IllegalArgumentException {
+		assertClassInvariants();
+		
 		if (this.isEqual(c)) {
 			return 0;
 		}
@@ -36,6 +38,9 @@ public abstract class AbstractCoordiante extends DataObject implements Coordinat
 		double cLongRad = toRadians(sc.getLongitude());
 		
 		double centralAngle = acos(sin(thisLatRad)*sin(cLatRad) + cos(thisLongRad)*cos(cLongRad)*cos(abs(thisLongRad-cLongRad)));
+		
+		assertClassInvariants();
+		
 		return sThis.getRadius()*centralAngle;
 	}
 
@@ -44,8 +49,12 @@ public abstract class AbstractCoordiante extends DataObject implements Coordinat
 	 */		
 	@Override
 	public boolean isEqual(Coordinate c) {
+		assertClassInvariants();
+		
 		SphericCoordinate sThis = this.toSpheric();
 		SphericCoordinate sc = c.toSpheric();
+		
+		assertClassInvariants();
 		
 		if (abs(sThis.getLatitude() - sc.getLatitude()) < DELTA 
 				&& abs(sThis.getLongitude() - sc.getLongitude()) < DELTA 
@@ -60,5 +69,17 @@ public abstract class AbstractCoordiante extends DataObject implements Coordinat
 
 	@Override
 	abstract public SphericCoordinate toSpheric();
+
+	@Override
+	public void assertClassInvariants() {
+		assertNotNull();
+	}
+	
+	/**
+	 * @methodtype assertion-helper
+	 */	
+	protected void assertNotNull() throws NullPointerException {
+		assert (this != null);
+	}
 
 }

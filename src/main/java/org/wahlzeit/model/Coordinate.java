@@ -36,5 +36,11 @@ interface Coordinate {
 	 * Converts the coordinate to spheric
 	 */		
 	public SphericCoordinate toSpheric();
-
+	
+	/**
+	 * @methodtype assertion
+	 * 
+	 * asserts class invariant
+	 */	
+	void assertClassInvariants();
 }

@@ -10,15 +10,21 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	 * @methodtype constructor 
 	 */
 	public CartesianCoordinate(double x, double y, double z) {
+		assertClassInvariants();
+		
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		
+		assertClassInvariants();
 	}
 	
 	/**
 	 * @methodtype get
 	 */	
 	public double getX() {
+		assertClassInvariants();
+	
 		return this.x;
 	}
 	
@@ -26,13 +32,19 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	 * @methodtype set
 	 */	
 	public void setX(double x) {
+		assertClassInvariants();
+		
 		this.x = x;
+		
+		assertClassInvariants();
 	}
 	
 	/**
 	 * @methodtype get
 	 */	
 	public double getY() {
+		assertClassInvariants();
+		
 		return this.y;
 	}
 	
@@ -40,13 +52,19 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	 * @methodtype set
 	 */	
 	public void setY(double y) {
+		assertClassInvariants();
+		
 		this.y = y;
+		
+		assertClassInvariants();
 	}
 	
 	/**
 	 * @methodtype get
 	 */	
 	public double getZ() {
+		assertClassInvariants();
+		
 		return this.z;
 	}
 	
@@ -54,7 +72,11 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	 * @methodtype set
 	 */	
 	public void setZ(double z) {
+		assertClassInvariants();
+		
 		this.z = z;
+		
+		assertClassInvariants();
 	}
 
 //	@Override
@@ -64,6 +86,8 @@ public class CartesianCoordinate extends AbstractCoordiante {
 
 	@Override
 	public SphericCoordinate toSpheric() {
+		assertClassInvariants();
+		
 		if (this.getX() == 0 && this.getY() == 0 && this.getZ() == 0) {
 			return new SphericCoordinate(0,0,0);
 		}
@@ -73,6 +97,8 @@ public class CartesianCoordinate extends AbstractCoordiante {
 		
 		double latitude = toDegrees(latRad) % 90;
 		double longitude = toDegrees(longRad) % 180;
+		
+		assertClassInvariants();
 		
 		return new SphericCoordinate(latitude,longitude,radius);
 	}
