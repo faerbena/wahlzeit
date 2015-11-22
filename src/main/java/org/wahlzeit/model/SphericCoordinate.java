@@ -19,6 +19,10 @@ class SphericCoordinate extends AbstractCoordiante {
 	public SphericCoordinate(double latitude, double longitude) throws IllegalArgumentException {
 		assertClassInvariants();
 		
+		// Preconditions
+		assertIsValidLatitude(latitude);
+		assertIsValidLongitude(longitude);
+		
 		this.latitude = latitude;
 		this.longitude = longitude;
 		
@@ -32,6 +36,9 @@ class SphericCoordinate extends AbstractCoordiante {
 		this(latitude, longitude);
 		
 		assertClassInvariants();
+		
+		// Precondition
+		assertIsValidRadius(radius);
 
 		this.radius = radius;
 		
@@ -44,6 +51,9 @@ class SphericCoordinate extends AbstractCoordiante {
 	public double getLatitude() {
 		assertClassInvariants();
 		
+		// Postcondition
+		assertIsValidLatitude(this.latitude);
+		
 		return this.latitude;
 	}
 
@@ -52,6 +62,9 @@ class SphericCoordinate extends AbstractCoordiante {
 	 */	
 	public double getLongitude() {
 		assertClassInvariants();
+		
+		// Postcondition
+		assertIsValidLongitude(this.longitude);
 		
 		return this.longitude;
 	}
@@ -62,6 +75,9 @@ class SphericCoordinate extends AbstractCoordiante {
 	public double getRadius() {
 		assertClassInvariants();
 		
+		// Postcondition
+		assertIsValidRadius(this.radius);
+		
 		return this.radius;
 	}	
 	
@@ -70,6 +86,9 @@ class SphericCoordinate extends AbstractCoordiante {
 	 */	
 	public void setLatitude(double latitude) {
 		assertClassInvariants();
+		
+		// Precondition
+		assertIsValidLatitude(latitude);
 		
 		this.latitude = latitude;
 		
@@ -82,6 +101,9 @@ class SphericCoordinate extends AbstractCoordiante {
 	public void setLongitude(double longitude) {
 		assertClassInvariants();
 		
+		// Precondition
+		assertIsValidLongitude(longitude);
+		
 		this.longitude = longitude;
 		
 		assertClassInvariants();
@@ -92,6 +114,9 @@ class SphericCoordinate extends AbstractCoordiante {
 	 */	
 	public void setRadius(double radius) {
 		assertClassInvariants();
+		
+		// Precondition
+		assertIsValidRadius(radius);
 		
 		this.radius = radius;
 		
@@ -104,11 +129,14 @@ class SphericCoordinate extends AbstractCoordiante {
 	public double getLatitudinalDistance(SphericCoordinate c) {
 		assertClassInvariants();
 		
-		double dist = this.getLatitude() - c.getLatitude();
+		double dist = abs(this.getLatitude() - c.getLatitude());
+		
+		// Postcondition
+		assert (dist >= 0);
 		
 		assertClassInvariants();
 		
-		return abs(dist);
+		return dist;
 	}
 	
 	/**
@@ -117,11 +145,14 @@ class SphericCoordinate extends AbstractCoordiante {
 	public double getLongitudinalDistance(SphericCoordinate c) {
 		assertClassInvariants();
 		
-		double dist = this.getLongitude() - c.getLongitude();
+		double dist = abs(this.getLongitude() - c.getLongitude());
+
+		// Postcondition
+		assert (dist >= 0);
 		
 		assertClassInvariants();
 		
-		return abs(dist);
+		return dist;
 	}
 	
 	@Override
@@ -144,16 +175,18 @@ class SphericCoordinate extends AbstractCoordiante {
 	public void assertClassInvariants() {
 		assertNotNull();
 		
-		assertIsValidLatitude();
-		assertIsValidLongitude();
-		assertIsValidRadius();
+		assertIsValidLatitude(latitude);
+		assertIsValidLongitude(longitude);
+		assertIsValidRadius(radius);
 	}
 	
 	/**
 	 * @methodtype assertion-helper
 	 */	
-	private void assertIsValidLatitude() throws IllegalArgumentException {
-		if (latitude < -90 || latitude > 90) {
+	private void assertIsValidLatitude(double lat) throws IllegalArgumentException {
+		assertIsValidValue(lat);
+		
+		if (lat < -90 || lat > 90) {
 			throw new IllegalArgumentException("The latitude needs to be between -90 and 90.");
 		}
 	}
@@ -161,8 +194,10 @@ class SphericCoordinate extends AbstractCoordiante {
 	/**
 	 * @methodtype assertion-helper
 	 */	
-	private void assertIsValidLongitude() throws IllegalArgumentException {
-		if (longitude < -180 || latitude > 180) {
+	private void assertIsValidLongitude(double lon) throws IllegalArgumentException {
+		assertIsValidValue(lon);
+		
+		if (lon < -180 || lon > 180) {
 			throw new IllegalArgumentException("The longitude needs to be between -180 and 180.");
 		}
 	}
@@ -170,8 +205,10 @@ class SphericCoordinate extends AbstractCoordiante {
 	/**
 	 * @methodtype assertion-helper
 	 */	
-	private void assertIsValidRadius() throws IllegalArgumentException {
-		if (radius < 0) {
+	private void assertIsValidRadius(double rad) throws IllegalArgumentException {
+		assertIsValidValue(rad);
+		
+		if (rad < 0) {
 			throw new IllegalArgumentException("The radius needs to be greater than 0.");
 		}
 	}	

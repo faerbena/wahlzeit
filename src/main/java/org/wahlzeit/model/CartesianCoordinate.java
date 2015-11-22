@@ -12,6 +12,11 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	public CartesianCoordinate(double x, double y, double z) {
 		assertClassInvariants();
 		
+		// Preconditions
+		assertIsValidValue(x);
+		assertIsValidValue(y);
+		assertIsValidValue(z);
+		
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -24,6 +29,9 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	 */	
 	public double getX() {
 		assertClassInvariants();
+		
+		// Postcondition
+		assertIsValidValue(this.x);
 	
 		return this.x;
 	}
@@ -33,6 +41,9 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	 */	
 	public void setX(double x) {
 		assertClassInvariants();
+		
+		// Precondition
+		assertIsValidValue(x);
 		
 		this.x = x;
 		
@@ -45,6 +56,9 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	public double getY() {
 		assertClassInvariants();
 		
+		// Postcondition
+		assertIsValidValue(this.y);
+		
 		return this.y;
 	}
 	
@@ -53,6 +67,9 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	 */	
 	public void setY(double y) {
 		assertClassInvariants();
+		
+		// Precondition
+		assertIsValidValue(y);
 		
 		this.y = y;
 		
@@ -65,6 +82,9 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	public double getZ() {
 		assertClassInvariants();
 		
+		// Postcondition
+		assertIsValidValue(this.x);
+		
 		return this.z;
 	}
 	
@@ -73,6 +93,9 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	 */	
 	public void setZ(double z) {
 		assertClassInvariants();
+		
+		// Precondition
+		assertIsValidValue(z);
 		
 		this.z = z;
 		
@@ -102,5 +125,14 @@ public class CartesianCoordinate extends AbstractCoordiante {
 		
 		return new SphericCoordinate(latitude,longitude,radius);
 	}
+	
+	@Override
+	public void assertClassInvariants() {
+		assertNotNull();
+		
+		assertIsValidValue(x);
+		assertIsValidValue(y);
+		assertIsValidValue(z);
+	}	
 
 }
