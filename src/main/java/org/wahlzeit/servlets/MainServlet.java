@@ -24,6 +24,7 @@ import com.google.api.client.util.Charsets;
 import com.google.appengine.api.images.Image;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.common.io.CharStreams;
+
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -35,11 +36,13 @@ import org.wahlzeit.model.User;
 import org.wahlzeit.model.UserSession;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.services.SessionManager;
+import org.wahlzeit.utils.Pattern;
 import org.wahlzeit.webparts.WebPart;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,6 +55,12 @@ import java.util.logging.Logger;
 /**
  * The main servlet class for handling incoming and outgoing requests.
  */
+@Pattern (
+		name = "Null Object",
+		participants = {
+					"RealObject"
+		}
+)
 public class MainServlet extends AbstractServlet {
 
 	private static final Logger log = Logger.getLogger(MainServlet.class.getName());

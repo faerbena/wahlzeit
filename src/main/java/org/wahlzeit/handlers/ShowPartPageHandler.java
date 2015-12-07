@@ -22,6 +22,7 @@ package org.wahlzeit.handlers;
 
 import org.wahlzeit.model.AccessRights;
 import org.wahlzeit.model.UserSession;
+import org.wahlzeit.utils.Pattern;
 import org.wahlzeit.webparts.WebPart;
 import org.wahlzeit.webparts.Writable;
 
@@ -31,6 +32,12 @@ import java.util.Map;
 /**
  * A handler class for a generic web page.
  */
+@Pattern (
+		name = "Builder",
+		participants = {
+					"ConcreteBuilder"
+		}
+)
 public class ShowPartPageHandler extends AbstractWebPageHandler {
 
 	/**

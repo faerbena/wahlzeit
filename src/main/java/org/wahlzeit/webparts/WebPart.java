@@ -22,6 +22,7 @@ package org.wahlzeit.webparts;
 
 import org.wahlzeit.utils.EnumValue;
 import org.wahlzeit.utils.HtmlUtil;
+import org.wahlzeit.utils.Pattern;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -33,6 +34,12 @@ import java.util.Map;
  * A WebPart has its data set from a client using key/value pairs.
  * A WebPart has a recursive structure; it may contain further WebParts.
  */
+@Pattern (
+		name = "Builder",
+		participants = {
+					"Product"
+		}
+)
 public class WebPart implements Writable {
 
 	/**

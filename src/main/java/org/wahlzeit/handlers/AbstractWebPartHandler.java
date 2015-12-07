@@ -31,6 +31,7 @@ import org.wahlzeit.services.Language;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.services.SysConfig;
 import org.wahlzeit.utils.HtmlUtil;
+import org.wahlzeit.utils.Pattern;
 import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
 import org.wahlzeit.webparts.WebPartTemplate;
@@ -43,6 +44,12 @@ import java.util.logging.Logger;
 /**
  * A superclass for handling parts of web pages.
  */
+@Pattern (
+		name = "Builder",
+		participants = {
+					"Builder"
+		}
+)
 public abstract class AbstractWebPartHandler implements WebPartHandler {
 
 	private static final Logger log = Logger.getLogger(AbstractWebPartHandler.class.getName());

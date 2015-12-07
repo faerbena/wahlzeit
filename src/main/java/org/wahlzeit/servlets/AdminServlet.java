@@ -23,10 +23,12 @@ package org.wahlzeit.servlets;
 import org.wahlzeit.handlers.PartUtil;
 import org.wahlzeit.main.ServiceMain;
 import org.wahlzeit.services.LogBuilder;
+import org.wahlzeit.utils.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -34,6 +36,12 @@ import java.util.logging.Logger;
 /**
  * The servlet for managing administrative system functions.
  */
+@Pattern (
+		name = "Null Object",
+		participants = {
+					"RealObject"
+		}
+)
 public class AdminServlet extends AbstractServlet {
 
 	/**

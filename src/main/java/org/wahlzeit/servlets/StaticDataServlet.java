@@ -1,15 +1,18 @@
 package org.wahlzeit.servlets;
 
 import com.google.appengine.api.images.Image;
+
 import org.apache.http.HttpStatus;
 import org.wahlzeit.model.Photo;
 import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.model.PhotoSize;
 import org.wahlzeit.model.persistence.ImageStorage;
 import org.wahlzeit.services.LogBuilder;
+import org.wahlzeit.utils.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Logger;
@@ -22,6 +25,12 @@ import java.util.logging.Logger;
  * 
  * @review
  */
+@Pattern (
+		name = "Null Object",
+		participants = {
+					"RealObject"
+		}
+)
 public class StaticDataServlet extends AbstractServlet {
 
 	Logger log = Logger.getLogger(StaticDataServlet.class.getName());
