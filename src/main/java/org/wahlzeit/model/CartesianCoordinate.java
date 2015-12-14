@@ -73,6 +73,9 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	public double getZ() {
 		assertClassInvariants();
 		
+		// Postcondition
+		assertIsValidValue(this.z);
+		
 		return this.z;
 	}
 	
