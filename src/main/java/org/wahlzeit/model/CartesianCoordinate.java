@@ -21,23 +21,12 @@ public class CartesianCoordinate extends AbstractCoordiante {
 		assertIsValidValue(y);
 		assertIsValidValue(z);
 		
-		CartesianCoordinate tmp = new CartesianCoordinate(x,y,z);
-		Coordinate result;
-		if (instances.containsKey(tmp.hashCode())) {
-			result = instances.get(tmp.hashCode());
-		} else {
-			synchronized(instances) {
-				if (instances.containsKey(tmp.hashCode())) {
-					result = instances.get(tmp.hashCode());
-				} else {
-					instances.put(tmp.hashCode(),tmp);
-					result = tmp;
-				}
-			}
-		}
 		
-		result.assertClassInvariants();
-		return result.toCartesian();
+		CartesianCoordinate tmp = new CartesianCoordinate(x,y,z);
+		
+		tmp.toSpheric(); // toSpheric() calls SphericCoordinate.getInstance()
+
+		return tmp;
 	}
 	
 	/**
