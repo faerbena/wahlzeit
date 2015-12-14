@@ -23,7 +23,7 @@ public class Location extends DataObject {
 	 */
 	public Location(String name, double latitude, double longitude) {
 		this.name = name;
-		this.coordinate = new SphericCoordinate(latitude,longitude);
+		this.coordinate = SphericCoordinate.getInstance(latitude,longitude);
 	}
 	
 	/**
@@ -66,7 +66,7 @@ public class Location extends DataObject {
 	 * @methodtype set @methodproperty convenience
 	 */
 	public void setCoordinate(double latitude, double longitude) {
-		SphericCoordinate coordinate = new SphericCoordinate(latitude,longitude);
+		SphericCoordinate coordinate = SphericCoordinate.getInstance(latitude,longitude);
 		this.coordinate = coordinate;
 	}
 }

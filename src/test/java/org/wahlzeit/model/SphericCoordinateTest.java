@@ -7,12 +7,12 @@ import org.junit.Test;
 import org.junit.BeforeClass;
 
 public class SphericCoordinateTest {
-	static SphericCoordinate c0 = new SphericCoordinate(0,0,0);
-	static SphericCoordinate c1 = new SphericCoordinate(80,120);
+	static SphericCoordinate c0 = SphericCoordinate.getInstance(0,0,0);
+	static SphericCoordinate c1 = SphericCoordinate.getInstance(80,120);
 	static SphericCoordinate c2 = null;
-	static SphericCoordinate c3 = new SphericCoordinate(85,80);
-	static SphericCoordinate c4 = new SphericCoordinate(30,150);
-	static SphericCoordinate c5 = new SphericCoordinate(45,135,2);
+	static SphericCoordinate c3 = SphericCoordinate.getInstance(85,80);
+	static SphericCoordinate c4 = SphericCoordinate.getInstance(30,150);
+	static SphericCoordinate c5 = SphericCoordinate.getInstance(45,135,2);
 	
 	@BeforeClass
 	public static void testPredefinded() {
@@ -24,22 +24,22 @@ public class SphericCoordinateTest {
 	
 	@Test (expected=IllegalArgumentException.class)
 	public void testLatitudeTooSmall() {		
-		SphericCoordinate c6 = new SphericCoordinate(-90.1,0);
+		SphericCoordinate c6 = SphericCoordinate.getInstance(-90.1,0);
 	}
 	
 	@Test (expected=IllegalArgumentException.class)
 	public void testLatitudeTooBig() {		
-		SphericCoordinate c6 = new SphericCoordinate(90.1,0);
+		SphericCoordinate c6 = SphericCoordinate.getInstance(90.1,0);
 	}
 	
 	@Test (expected=IllegalArgumentException.class)
 	public void testLongitudeTooSmall() {		
-		SphericCoordinate c6 = new SphericCoordinate(-180.1,0);
+		SphericCoordinate c6 = SphericCoordinate.getInstance(-180.1,0);
 	}
 	
 	@Test (expected=IllegalArgumentException.class)
 	public void testLongitudeTooBig() {		
-		SphericCoordinate c6 = new SphericCoordinate(180.1,0);
+		SphericCoordinate c6 = SphericCoordinate.getInstance(180.1,0);
 	}
 
 	@Test (expected=NullPointerException.class)
@@ -95,10 +95,10 @@ public class SphericCoordinateTest {
 	
 	@Test
 	public void testIsEqual() {
-		assertTrue(c0.isEqual(new SphericCoordinate(0,0,0)));
-		assertTrue(c5.isEqual(new SphericCoordinate(45,135,2)));
+		assertTrue(c0.isEqual(SphericCoordinate.getInstance(0,0,0)));
+		assertTrue(c5.isEqual(SphericCoordinate.getInstance(45,135,2)));
 		
-		assertTrue(c0.isEqual(new CartesianCoordinate(0,0,0)));
-		assertTrue(c5.isEqual(new CartesianCoordinate(-1,1,sqrt(2))));
+		assertTrue(c0.isEqual(SphericCoordinate.getInstance(0,0,0)));
+		assertTrue(c5.isEqual(CartesianCoordinate.getInstance(-1,1,sqrt(2))));
 	}
 }

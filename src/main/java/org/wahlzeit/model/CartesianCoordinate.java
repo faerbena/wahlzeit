@@ -9,19 +9,35 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	/**
 	 * @methodtype constructor 
 	 */
-	public CartesianCoordinate(double x, double y, double z) {
-		assertClassInvariants();
-		
+	private CartesianCoordinate(double x, double y, double z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+	
+	public static CartesianCoordinate getInstance(double x, double y, double z) {
 		// Preconditions
 		assertIsValidValue(x);
 		assertIsValidValue(y);
 		assertIsValidValue(z);
 		
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		CartesianCoordinate tmp = new CartesianCoordinate(x,y,z);
+		Coordinate result;
+		if (instances.containsKey(tmp.hashCode())) {
+			result = instances.get(tmp.hashCode());
+		} else {
+			synchronized(instances) {
+				if (instances.containsKey(tmp.hashCode())) {
+					result = instances.get(tmp.hashCode());
+				} else {
+					instances.put(tmp.hashCode(),tmp);
+					result = tmp;
+				}
+			}
+		}
 		
-		assertClassInvariants();
+		result.assertClassInvariants();
+		return result.toCartesian();
 	}
 	
 	/**
@@ -29,9 +45,6 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	 */	
 	public double getX() {
 		assertClassInvariants();
-		
-		// Postcondition
-		assertIsValidValue(this.x);
 	
 		return this.x;
 	}
@@ -39,15 +52,11 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	/**
 	 * @methodtype set
 	 */	
-	public void setX(double x) {
-		assertClassInvariants();
-		
+	public CartesianCoordinate setX(double x) {	
 		// Precondition
 		assertIsValidValue(x);
 		
-		this.x = x;
-		
-		assertClassInvariants();
+		return getInstance(x, this.y, this.z);
 	}
 	
 	/**
@@ -56,24 +65,17 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	public double getY() {
 		assertClassInvariants();
 		
-		// Postcondition
-		assertIsValidValue(this.y);
-		
 		return this.y;
 	}
 	
 	/**
 	 * @methodtype set
 	 */	
-	public void setY(double y) {
-		assertClassInvariants();
-		
+	public CartesianCoordinate setY(double y) {
 		// Precondition
 		assertIsValidValue(y);
 		
-		this.y = y;
-		
-		assertClassInvariants();
+		return getInstance(this.x, y, this.z);
 	}
 	
 	/**
@@ -82,37 +84,29 @@ public class CartesianCoordinate extends AbstractCoordiante {
 	public double getZ() {
 		assertClassInvariants();
 		
-		// Postcondition
-		assertIsValidValue(this.x);
-		
 		return this.z;
 	}
 	
 	/**
 	 * @methodtype set
 	 */	
-	public void setZ(double z) {
-		assertClassInvariants();
-		
+	public CartesianCoordinate setZ(double z) {
 		// Precondition
 		assertIsValidValue(z);
 		
-		this.z = z;
-		
-		assertClassInvariants();
+		return getInstance(this.x, this.y, z);
 	}
 
-//	@Override
-//	public CartesianCoordinate toCartesian() {
-//		return this;
-//	}
+	@Override
+	public CartesianCoordinate toCartesian() {
+		return this;
+	}
 
 	@Override
 	public SphericCoordinate toSpheric() {
-		assertClassInvariants();
 		
 		if (this.getX() == 0 && this.getY() == 0 && this.getZ() == 0) {
-			return new SphericCoordinate(0,0,0);
+			return SphericCoordinate.getInstance(0,0,0);
 		}
 		double radius = sqrt(pow(this.getX(),2) + pow(this.getY(),2) + pow(this.getZ(),2));
 		double latRad = acos(this.getZ()/radius);
@@ -121,9 +115,7 @@ public class CartesianCoordinate extends AbstractCoordiante {
 		double latitude = toDegrees(latRad) % 90;
 		double longitude = toDegrees(longRad) % 180;
 		
-		assertClassInvariants();
-		
-		return new SphericCoordinate(latitude,longitude,radius);
+		return SphericCoordinate.getInstance(latitude,longitude,radius);
 	}
 	
 	@Override

@@ -23,12 +23,12 @@ interface Coordinate {
 	 */		
 	public boolean isEqual(Coordinate c);
 	
-//	/**
-//	 * @methodtype conversion-helper
-//	 * 
-//	 * Converts the coordinate to cartesian
-//	 */		
-//	public CartesianCoordinate toCartesian();
+	/**
+	 * @methodtype conversion-helper
+	 * 
+	 * Converts the coordinate to cartesian
+	 */		
+	public CartesianCoordinate toCartesian();
 	
 	/**
 	 * @methodtype conversion-helper

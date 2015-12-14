@@ -6,9 +6,13 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.toRadians;
 
+import java.util.HashMap;
+
 import org.wahlzeit.services.DataObject;
 
 public abstract class AbstractCoordiante extends DataObject implements Coordinate {
+	
+	protected static HashMap<Integer,Coordinate> instances = new HashMap<Integer,Coordinate>(7);
 
 	private static final double DELTA = 0.00001; // constant for comparing double values
 	/**
@@ -16,8 +20,6 @@ public abstract class AbstractCoordiante extends DataObject implements Coordinat
 	 */	
 	@Override
 	public double getDistance(Coordinate c) {
-		assertClassInvariants();
-		
 		// Preconditions
 		c.assertClassInvariants();
 		assertRadiusesMatch(c);
@@ -48,13 +50,35 @@ public abstract class AbstractCoordiante extends DataObject implements Coordinat
 		return result;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if ((obj == null) || !(obj instanceof Coordinate)) {
+			return false;
+		}
+		
+		return (this == obj);
+	}
+	
+//	@Override
+//	public int hashCode() {
+//		SphericCoordinate tmp = this.toSpheric();
+//		
+//		/**
+//		 * returns the same hashcode for Coordinates with the same latitude, longitude and radius
+//		 * (compared to the constant DELTA)
+//		 */
+//		int hash = 1;
+//        hash = hash * 31 + (int) ((tmp.getLatitude()%DELTA)/DELTA);
+//        hash = hash * 17 + (int) ((tmp.getLongitude()%DELTA)/DELTA);
+//        hash = hash * 13 + (int) ((tmp.getRadius()%DELTA)/DELTA);
+//        return hash;
+//	}
+	
 	/**
 	 * @methodtype composed-conversion
 	 */		
 	@Override
 	public boolean isEqual(Coordinate c) {
-		assertClassInvariants();
-		
 		// Precondition
 		c.assertClassInvariants();
 		
@@ -77,10 +101,18 @@ public abstract class AbstractCoordiante extends DataObject implements Coordinat
 		return false;
 	}
 
-//	@Override
-//	abstract public CartesianCoordinate toCartesian();
+	/**
+	 * @methodtype conversion-helper
+	 * 
+	 * Converts the coordinate to cartesian
+	 */	
+	abstract public CartesianCoordinate toCartesian();
 
-	@Override
+	/**
+	 * @methodtype conversion-helper
+	 * 
+	 * Converts the coordinate to spheric
+	 */
 	abstract public SphericCoordinate toSpheric();
 
 	@Override
@@ -101,14 +133,13 @@ public abstract class AbstractCoordiante extends DataObject implements Coordinat
 	protected void assertRadiusesMatch(Coordinate c) throws IllegalArgumentException {
 		if (this.toSpheric().getRadius() != c.toSpheric().getRadius()) {
 			throw new IllegalArgumentException("The radiuses must match to calculate the great-circle distance.");
-		}
-		
+		}		
 	}
 	
 	/**
 	 * @methodtype assertion-helper
 	 */	
-	protected void assertIsValidValue(double v) throws IllegalArgumentException {
+	protected static void assertIsValidValue(double v) throws IllegalArgumentException {
 		if (Double.isNaN(v)) {
 			throw new IllegalArgumentException("The value needs to be a number.");
 		}
