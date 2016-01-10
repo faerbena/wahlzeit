@@ -21,12 +21,12 @@ public class Dog {
 	 * @methodtype constructor
 	 */
 	public Dog(DogBreed breed, String name, double age, String coatColor) {
-		this.breed = breed;
-		breed.addInstance(this);
-		
+		this.breed = breed;		
 		this.name = name;
 		this.age = age;
 		this.coatColor = coatColor;
+		
+		breed.addInstance(this);
 	}
 	
 	/**
@@ -85,6 +85,8 @@ public class Dog {
 	 */
 	public void setCoatColor(String coatColor) {
 		this.coatColor = coatColor;
+		
+		this.breed.addPossibleCoatColor(coatColor);
 	}
 
 }

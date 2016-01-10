@@ -105,7 +105,9 @@ public class DogBreed {
 	}
 	
 	public void addPossibleCoatColor(String coatColor) {
-		possibleCoatColors.add(coatColor);
+		if (coatColor != "" && !this.containsPossibleCoatColor(coatColor)){
+			this.possibleCoatColors.add(coatColor);
+		}
 	}
 	
 	public void removePossibleCoatColor(String coatColor) {
@@ -114,10 +116,7 @@ public class DogBreed {
 	
 	public void addInstance(Dog dog) {
 		instances.add(dog);
-		String coatColor = dog.getCoatColor();
-		if (coatColor != "" && !this.containsPossibleCoatColor(coatColor)){
-			this.addPossibleCoatColor(coatColor);
-		}
+		this.addPossibleCoatColor(dog.getCoatColor());
 	}
 	
 	public void removeInstance(Dog dog) {
