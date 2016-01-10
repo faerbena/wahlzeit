@@ -1,11 +1,7 @@
 package org.wahlzeit.model;
 
 public class DogPhoto extends Photo {
-	// attributes for name, age, coat color and breed of the dog
-	protected String name;
-	protected double age;
-	protected String coatColor;
-	protected String breed;
+	protected Dog dog;
 
 	/**
 	 * @methodtype constructor
@@ -15,30 +11,41 @@ public class DogPhoto extends Photo {
 	}
 
 	/**
-	 * @methodtype constructor @methodproperty convenience
+	 * @methodtype constructor
 	 */
 	public DogPhoto(PhotoId myId) {
-		this(myId, null, "", 0, "", "");
+		super(myId);
+	}
+	
+	/**
+	 * @methodtype constructor
+	 */
+	public DogPhoto(PhotoId myId, Location location, Dog dog) {
+		super(myId);
+		
+		this.location = location;
+		this.dog = dog;
 	}
 	
 	/**
 	 * @methodtype constructor @methodproperty convenience
 	 */
 	public DogPhoto(PhotoId myId, Location location) {
-		this(myId, location, "", 0, "", "");
+		this(myId,location,null);
 	}
 	
 	/**
-	 * @methodtype constructor @methodproperty primitive
+	 * @methodtype constructor @methodproperty convenience
 	 */
-	public DogPhoto(PhotoId myId, Location location, String name, double age, String coatColor, String breed) {
-		super(myId);
-		
-		this.location = location;
-		this.name = name;
-		this.age = age;
-		this.coatColor = coatColor;
-		this.breed = breed;
+	public DogPhoto(PhotoId myId, Dog dog) {
+		this(myId,null,dog);
+	}
+	
+	/**
+	 * @methodtype constructor @methodproperty convenience
+	 */
+	public DogPhoto(PhotoId myId, Location location, DogBreed breed, String name, double age, String coatColor) {
+		this(myId, location, new Dog(breed, name, age, coatColor));
 	}
 		
 }
