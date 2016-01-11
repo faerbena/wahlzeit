@@ -13,9 +13,9 @@ public class Dog {
 	protected DogBreed breed;
 	
 	// attributes for name, age, coat color of the dog
-	protected String name = "";
-	protected double age = 0;
-	protected String coatColor = "";
+	protected String name;
+	protected double age;
+	protected String coatColor;
 
 	/**
 	 * @methodtype constructor
@@ -70,7 +70,7 @@ public class Dog {
 	/**
 	 * @methodtype set
 	 */
-	public void setName(double age) {
+	public void setAge(double age) {
 		this.age = age;
 	}
 	/**

@@ -34,11 +34,12 @@ public class DogBreed {
 	 * @methodtype constructor
 	 */
 	public DogBreed(String name, String description, String temperament, ArrayList<String> possibleCoatColors) {
+		assert (possibleCoatColors != null);
+		
 		this.name = name;
 		this.description = description;
 		this.temperament = temperament;
 		this.possibleCoatColors = possibleCoatColors;
-		
 	}
 	
 	/**
@@ -104,22 +105,29 @@ public class DogBreed {
 		return possibleCoatColors.contains(coatColor);
 	}
 	
-	public void addPossibleCoatColor(String coatColor) {
+	protected void addPossibleCoatColor(String coatColor) {
 		if (coatColor != "" && !this.containsPossibleCoatColor(coatColor)){
 			this.possibleCoatColors.add(coatColor);
 		}
 	}
 	
-	public void removePossibleCoatColor(String coatColor) {
-		possibleCoatColors.remove(coatColor);
+//	private void removePossibleCoatColor(String coatColor) {
+//		possibleCoatColors.remove(coatColor);
+//	}
+	
+	/**
+	 * @methodtype get
+	 */
+	protected ArrayList<Dog> getInstances() {
+		return this.instances;
 	}
 	
-	public void addInstance(Dog dog) {
+	protected void addInstance(Dog dog) {
 		instances.add(dog);
 		this.addPossibleCoatColor(dog.getCoatColor());
 	}
 	
-	public void removeInstance(Dog dog) {
+	protected void removeInstance(Dog dog) {
 		instances.remove(dog);
 	}
 
