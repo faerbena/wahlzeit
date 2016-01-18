@@ -1,5 +1,6 @@
 package org.wahlzeit.model;
 
+import org.wahlzeit.services.DataObject;
 import org.wahlzeit.utils.Pattern;
 
 @Pattern (
@@ -9,7 +10,7 @@ import org.wahlzeit.utils.Pattern;
 		}
 )
 
-public class Dog {
+public class Dog  extends DataObject {
 	protected DogBreed breed;
 	
 	// attributes for name, age, coat color of the dog
@@ -20,7 +21,7 @@ public class Dog {
 	/**
 	 * @methodtype constructor
 	 */
-	public Dog(DogBreed breed, String name, double age, String coatColor) {
+	protected Dog(DogBreed breed, String name, double age, String coatColor) {
 		this.breed = breed;		
 		this.name = name;
 		this.age = age;

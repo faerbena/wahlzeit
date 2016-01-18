@@ -3,6 +3,7 @@ package org.wahlzeit.model;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -24,7 +25,7 @@ public class DogBreedTest {
 		b2 = new DogBreed("Jack Russell Terrier",
 				"The Jack Russell Terrier is a small terrier that has its origins in fox hunting.",
 				"Their high energy and drive make these dogs ideally suited to a number of different dog sports.",
-				new ArrayList<String>());
+				new LinkedList<String>());
 	}
 
 	@Test

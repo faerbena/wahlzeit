@@ -1,7 +1,8 @@
 package org.wahlzeit.model;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
+import org.wahlzeit.services.DataObject;
 import org.wahlzeit.utils.Pattern;
 
 @Pattern (
@@ -14,7 +15,7 @@ import org.wahlzeit.utils.Pattern;
 /**
  * Class specifying the breed (type) of each Dog
  */
-public class DogBreed {
+public class DogBreed extends DataObject {
 	// the name of the breed, e.g. Labrador Retriever, Golden Retriever, Jack Russell Terrier, ...
 	protected String name;
 	
@@ -25,15 +26,15 @@ public class DogBreed {
 	public String temperament;
 	
 	// list of possible coat colors for the breed
-	public ArrayList<String> possibleCoatColors;
+	public LinkedList<String> possibleCoatColors;
 	
 	// instances of the breed
-	protected ArrayList<Dog> instances = new ArrayList<Dog>();
+	protected LinkedList<Dog> instances = new LinkedList<Dog>();
 
 	/**
 	 * @methodtype constructor
 	 */
-	public DogBreed(String name, String description, String temperament, ArrayList<String> possibleCoatColors) {
+	protected DogBreed(String name, String description, String temperament, LinkedList<String> possibleCoatColors) {
 		assert (possibleCoatColors != null);
 		
 		this.name = name;
@@ -45,8 +46,8 @@ public class DogBreed {
 	/**
 	 * @methodtype constructor @methodproperty convenience
 	 */
-	public DogBreed(String name) {
-		this(name,"","",new ArrayList<String>());
+	protected DogBreed(String name) {
+		this(name,"","",new LinkedList<String>());
 	}
 	
 	/**
@@ -87,14 +88,14 @@ public class DogBreed {
 	/**
 	 * @methodtype get
 	 */
-	public ArrayList<String> getPossibleCoatColors() {
+	public LinkedList<String> getPossibleCoatColors() {
 		return this.possibleCoatColors;
 	}
 	
 	/**
 	 * @methodtype set
 	 */
-	public void setPossibleCoatColors(ArrayList<String> possibleCoatColors) {
+	public void setPossibleCoatColors(LinkedList<String> possibleCoatColors) {
 		this.possibleCoatColors = possibleCoatColors;
 	}
 	
@@ -118,7 +119,7 @@ public class DogBreed {
 	/**
 	 * @methodtype get
 	 */
-	protected ArrayList<Dog> getInstances() {
+	protected LinkedList<Dog> getInstances() {
 		return this.instances;
 	}
 	
