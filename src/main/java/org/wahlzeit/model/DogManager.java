@@ -9,7 +9,9 @@ public class DogManager extends ObjectManager {
 	
 	public Dog createDog(String breedName, String name, double age, String coatColor) {
 		DogBreed breed = getDogBreed(breedName);
-		return new Dog(breed, name, age, coatColor);
+		Dog dog = new Dog(breed, name, age, coatColor);
+		writeObject(dog);
+		return dog;
 	}
 
 	public synchronized DogBreed getDogBreed(String breedName) {
@@ -22,6 +24,7 @@ public class DogManager extends ObjectManager {
 	public synchronized DogBreed createDogBreed(String breedName) {
 		DogBreed breed = new DogBreed(breedName);
 		breeds.put(breedName, breed);
+		writeObject(breed);
 		return breed;
 	}
 
